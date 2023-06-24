@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:alpine
+    container_name: pg_container
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: furkan
+      POSTGRES_PASSWORD: 427542
+      POSTGRES_DB: my_db
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "81:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev.furkan@outlook.com
+      PGADMIN_DEFAULT_PASSWORD: 427542
+    volumes:
+      - pgadmin4:/var/lib/pgadmin
+  redis:
+    image: redis:alpine
+    container_name: redis_container
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisDB:/data
+
+volumes:
+  postgres:
+  pgadmin4:
+  redisDB:
